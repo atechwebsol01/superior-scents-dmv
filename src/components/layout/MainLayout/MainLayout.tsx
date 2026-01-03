@@ -4,6 +4,7 @@ import { cn } from '@/lib/cn';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { BottomNav } from '@/components/layout/BottomNav';
+import { useAuth } from '@/features/auth';
 
 export interface MainLayoutProps {
   children?: React.ReactNode;
@@ -12,24 +13,18 @@ export interface MainLayoutProps {
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
-
-  // Mock user data - will be replaced with actual auth data
-  const user = {
-    name: 'Admin User',
-    avatar: null,
-  };
+  const { user, fullName, logout } = useAuth();
 
   const handleLogout = () => {
-    // Will be implemented with auth store
-    console.log('Logout clicked');
+    logout();
   };
 
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Header */}
       <Header
-        userName={user.name}
-        userAvatar={user.avatar || undefined}
+        userName={fullName || user?.firstName || 'User'}
+        userAvatar={user?.avatar}
         onMenuClick={() => setSidebarOpen(true)}
         onLogout={handleLogout}
       />
