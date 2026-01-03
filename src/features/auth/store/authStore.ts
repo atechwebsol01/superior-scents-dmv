@@ -31,12 +31,17 @@ export const useAuthStore = create<AuthStore>()(
             // Simulate network delay
             await new Promise(resolve => setTimeout(resolve, 800));
             
-            // Mock user data
+            // Mock user data - Extract name from email
+            const emailName = credentials.email.split('@')[0];
+            const nameParts = emailName.split(/[._-]/); // Split by common separators
+            const firstName = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1) : 'Admin';
+            const lastName = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1) : '';
+            
             const mockUser: User = {
               id: '1',
               email: credentials.email,
-              firstName: credentials.email.split('@')[0],
-              lastName: 'User',
+              firstName,
+              lastName,
               role: 'admin',
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),

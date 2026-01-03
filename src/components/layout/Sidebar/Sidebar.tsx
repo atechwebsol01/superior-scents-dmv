@@ -40,7 +40,7 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
 };
 
 const defaultItems: SidebarItem[] = [
-  { id: 'dashboard', label: 'Dashboard', path: '/', icon: 'LayoutDashboard' },
+  { id: 'dashboard', label: 'Dashboard', path: '/dashboard', icon: 'LayoutDashboard' },
   { id: 'customers', label: 'Customers', path: '/customers', icon: 'Users' },
   { id: 'employees', label: 'Employees', path: '/employees', icon: 'UserCog' },
   { id: 'invoices', label: 'Invoices', path: '/invoices', icon: 'FileText' },
@@ -78,14 +78,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
           className
         )}
       >
-        {/* Header */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-neutral-800">
+        {/* Header with gradient accent */}
+        <div className="h-16 flex items-center justify-between px-4 border-b border-neutral-800 relative">
+          {/* Gradient accent line */}
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500" />
+          
           {!isCollapsed && (
             <div className="flex flex-col">
-              <span className="text-lg font-bold bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
+              <span className="text-lg font-bold gradient-brand-text">
                 Superior Scents
               </span>
               <span className="text-[10px] text-neutral-400 -mt-1">DMV, LLC</span>
+            </div>
+          )}
+          {isCollapsed && (
+            <div className="mx-auto w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center">
+              <span className="text-lg font-bold text-white">S</span>
             </div>
           )}
           <button
@@ -95,22 +103,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
           >
             <X className="w-5 h-5" />
           </button>
-          <button
-            type="button"
-            onClick={onToggleCollapse}
-            className={cn(
-              'p-2 hover:bg-neutral-800 rounded-lg hidden lg:block',
-              isCollapsed && 'mx-auto'
-            )}
-          >
-            <ChevronLeft
-              className={cn(
-                'w-5 h-5 transition-transform',
-                isCollapsed && 'rotate-180'
-              )}
-            />
-          </button>
+          {!isCollapsed && (
+            <button
+              type="button"
+              onClick={onToggleCollapse}
+              className="p-2 hover:bg-neutral-800 rounded-lg hidden lg:block"
+            >
+              <ChevronLeft className="w-5 h-5 transition-transform" />
+            </button>
+          )}
         </div>
+
+        {/* Collapsed toggle button */}
+        {isCollapsed && (
+          <div className="flex justify-center py-2">
+            <button
+              type="button"
+              onClick={onToggleCollapse}
+              className="p-2 hover:bg-neutral-800 rounded-lg hidden lg:block"
+            >
+              <ChevronLeft className="w-5 h-5 transition-transform rotate-180" />
+            </button>
+          </div>
+        )}
 
         {/* Navigation */}
         <nav className="p-3 space-y-1">
@@ -126,7 +141,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     'flex items-center gap-3 px-4 py-2.5 rounded-lg',
                     'text-neutral-300 hover:bg-neutral-800 hover:text-white',
                     'transition-all duration-200',
-                    isActive && 'bg-primary-500/20 text-primary-400',
+                    isActive && 'bg-gradient-to-r from-primary-500/20 to-secondary-500/20 text-white border-l-2 border-primary-500',
                     isCollapsed && 'justify-center px-2'
                   )
                 }
@@ -139,6 +154,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
             );
           })}
         </nav>
+
+        {/* Bottom gradient accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 opacity-50" />
       </aside>
     </>
   );

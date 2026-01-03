@@ -36,7 +36,11 @@ export const useAuth = () => {
 
   const isAdmin = user?.role === 'admin';
   const isManager = user?.role === 'manager' || user?.role === 'admin';
-  const fullName = user ? `${user.firstName} ${user.lastName}` : '';
+  
+  // Build full name, filtering out empty lastName
+  const fullName = user 
+    ? [user.firstName, user.lastName].filter(Boolean).join(' ')
+    : '';
 
   return {
     // State

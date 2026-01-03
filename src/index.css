@@ -3,23 +3,24 @@
 
 /* ============================================
    SUPERIOR SCENTS DMV, LLC - DESIGN SYSTEM
-   Color Scheme: Purple (Primary) + Green (Secondary)
+   Color Scheme: Purple + Green Creative Blend
+   With Dark Mode Support
    ============================================ */
 
 @theme {
-  /* Primary: Royal Purple */
-  --color-primary-50: #FAF5FF;
-  --color-primary-100: #F3E8FF;
-  --color-primary-200: #E9D5FF;
-  --color-primary-300: #D8B4FE;
-  --color-primary-400: #C084FC;
-  --color-primary-500: #A855F7;
-  --color-primary-600: #9333EA;
-  --color-primary-700: #7E22CE;
-  --color-primary-800: #6B21A8;
-  --color-primary-900: #581C87;
+  /* Primary: Purple-Green Gradient Base (Purple dominant) */
+  --color-primary-50: #F5F3FF;
+  --color-primary-100: #EDE9FE;
+  --color-primary-200: #DDD6FE;
+  --color-primary-300: #C4B5FD;
+  --color-primary-400: #A78BFA;
+  --color-primary-500: #8B5CF6;
+  --color-primary-600: #7C3AED;
+  --color-primary-700: #6D28D9;
+  --color-primary-800: #5B21B6;
+  --color-primary-900: #4C1D95;
 
-  /* Secondary: Emerald Green */
+  /* Secondary: Green (for accents and CTAs) */
   --color-secondary-50: #ECFDF5;
   --color-secondary-100: #D1FAE5;
   --color-secondary-200: #A7F3D0;
@@ -31,17 +32,17 @@
   --color-secondary-800: #065F46;
   --color-secondary-900: #064E3B;
 
-  /* Accent: Gold */
-  --color-accent-50: #FFFBEB;
-  --color-accent-100: #FEF3C7;
-  --color-accent-200: #FDE68A;
-  --color-accent-300: #FCD34D;
-  --color-accent-400: #FBBF24;
-  --color-accent-500: #F59E0B;
-  --color-accent-600: #D97706;
-  --color-accent-700: #B45309;
-  --color-accent-800: #92400E;
-  --color-accent-900: #78350F;
+  /* Accent: Teal (Purple + Green blend) */
+  --color-accent-50: #F0FDFA;
+  --color-accent-100: #CCFBF1;
+  --color-accent-200: #99F6E4;
+  --color-accent-300: #5EEAD4;
+  --color-accent-400: #2DD4BF;
+  --color-accent-500: #14B8A6;
+  --color-accent-600: #0D9488;
+  --color-accent-700: #0F766E;
+  --color-accent-800: #115E59;
+  --color-accent-900: #134E4A;
 
   /* Neutral: Slate */
   --color-neutral-50: #F8FAFC;
@@ -54,6 +55,7 @@
   --color-neutral-700: #334155;
   --color-neutral-800: #1E293B;
   --color-neutral-900: #0F172A;
+  --color-neutral-950: #020617;
 
   /* Success */
   --color-success-50: #F0FDF4;
@@ -87,7 +89,7 @@
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Base Styles */
+/* Base Styles - Light Mode (default) */
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -98,9 +100,89 @@ body {
   background-color: var(--color-neutral-50);
   color: var(--color-neutral-900);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom Scrollbar */
+/* Dark Mode Styles */
+html.dark body {
+  background-color: var(--color-neutral-950);
+  color: var(--color-neutral-100);
+}
+
+html.dark .bg-white {
+  background-color: var(--color-neutral-900) !important;
+}
+
+html.dark .bg-neutral-50 {
+  background-color: var(--color-neutral-950) !important;
+}
+
+html.dark .bg-neutral-100 {
+  background-color: var(--color-neutral-900) !important;
+}
+
+html.dark .text-neutral-900 {
+  color: var(--color-neutral-100) !important;
+}
+
+html.dark .text-neutral-700 {
+  color: var(--color-neutral-300) !important;
+}
+
+html.dark .text-neutral-600 {
+  color: var(--color-neutral-400) !important;
+}
+
+html.dark .text-neutral-500 {
+  color: var(--color-neutral-400) !important;
+}
+
+html.dark .border-neutral-200 {
+  border-color: var(--color-neutral-700) !important;
+}
+
+html.dark .border-neutral-300 {
+  border-color: var(--color-neutral-600) !important;
+}
+
+html.dark .divide-neutral-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--color-neutral-700) !important;
+}
+
+html.dark .divide-neutral-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--color-neutral-800) !important;
+}
+
+html.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: var(--color-neutral-800) !important;
+  border-color: var(--color-neutral-600) !important;
+  color: var(--color-neutral-100) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: var(--color-neutral-500) !important;
+}
+
+html.dark .hover\:bg-neutral-50:hover {
+  background-color: var(--color-neutral-800) !important;
+}
+
+html.dark .hover\:bg-neutral-100:hover {
+  background-color: var(--color-neutral-800) !important;
+}
+
+/* Custom Scrollbar - Light */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -120,10 +202,27 @@ body {
   background: var(--color-neutral-400);
 }
 
+/* Custom Scrollbar - Dark */
+html.dark ::-webkit-scrollbar-track {
+  background: var(--color-neutral-800);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-600);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}
+
 /* Focus Styles */
 *:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-primary-500), 0 0 0 4px white;
+}
+
+html.dark *:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary-400), 0 0 0 4px var(--color-neutral-900);
 }
 
 /* Remove default input styles */
@@ -135,6 +234,53 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Gradient Classes for Purple-Green Blend */
+.gradient-brand {
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
+}
+
+.gradient-brand-vertical {
+  background: linear-gradient(180deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
+}
+
+.gradient-brand-text {
+  background: linear-gradient(135deg, var(--color-primary-400) 0%, var(--color-secondary-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-brand-border {
+  border-image: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-500)) 1;
+}
+
+/* Animated gradient background */
+.gradient-animated {
+  background: linear-gradient(-45deg, var(--color-primary-600), var(--color-secondary-500), var(--color-primary-500), var(--color-accent-500));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.15), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+}
+
+html.dark .card-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.25), 0 8px 10px -6px rgba(16, 185, 129, 0.15);
 }
 
 /* Print Styles */

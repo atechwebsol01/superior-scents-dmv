@@ -33,30 +33,30 @@ const StatCard: React.FC<StatCardProps> = ({
   icon,
   iconBgColor,
 }) => (
-  <Card>
-    <CardBody>
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm font-medium text-neutral-500">{title}</p>
-          <p className="text-2xl font-bold text-neutral-900 mt-1">{value}</p>
-          <div className="flex items-center mt-2">
+  <Card className="card-hover">
+    <CardBody className="p-4">
+      <div className="flex items-center justify-between gap-2">
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-medium text-neutral-500 truncate">{title}</p>
+          <p className="text-xl font-bold text-neutral-900 mt-1">{value}</p>
+          <div className="flex items-center gap-1 mt-1.5 flex-wrap">
             {changeType === 'increase' ? (
-              <ArrowUpRight className="w-4 h-4 text-success-500" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-secondary-500 flex-shrink-0" />
             ) : (
-              <ArrowDownRight className="w-4 h-4 text-error-500" />
+              <ArrowDownRight className="w-3.5 h-3.5 text-error-500 flex-shrink-0" />
             )}
             <span
               className={cn(
-                'text-sm font-medium ml-1',
-                changeType === 'increase' ? 'text-success-600' : 'text-error-600'
+                'text-xs font-semibold',
+                changeType === 'increase' ? 'text-secondary-600' : 'text-error-600'
               )}
             >
               {change}
             </span>
-            <span className="text-sm text-neutral-400 ml-1">vs last month</span>
+            <span className="text-xs text-neutral-400">vs last mo.</span>
           </div>
         </div>
-        <div className={cn('p-3 rounded-xl', iconBgColor)}>
+        <div className={cn('p-2.5 rounded-xl flex-shrink-0', iconBgColor)}>
           {icon}
         </div>
       </div>
@@ -71,13 +71,16 @@ const StatCard: React.FC<StatCardProps> = ({
 export const DashboardPage: React.FC = () => {
   const { user, fullName } = useAuth();
 
+  // Format display name - remove "User" if it's just the email prefix
+  const displayName = fullName?.trim() || user?.firstName || 'there';
+
   const stats = [
     {
       title: 'Total Customers',
       value: '2,847',
       change: '+12.5%',
       changeType: 'increase' as const,
-      icon: <Users className="w-6 h-6 text-primary-600" />,
+      icon: <Users className="w-5 h-5 text-primary-600" />,
       iconBgColor: 'bg-primary-100',
     },
     {
@@ -85,7 +88,7 @@ export const DashboardPage: React.FC = () => {
       value: '156',
       change: '+8.2%',
       changeType: 'increase' as const,
-      icon: <FileText className="w-6 h-6 text-secondary-600" />,
+      icon: <FileText className="w-5 h-5 text-secondary-600" />,
       iconBgColor: 'bg-secondary-100',
     },
     {
@@ -93,7 +96,7 @@ export const DashboardPage: React.FC = () => {
       value: '$24,580',
       change: '-3.1%',
       changeType: 'decrease' as const,
-      icon: <CreditCard className="w-6 h-6 text-accent-600" />,
+      icon: <CreditCard className="w-5 h-5 text-accent-600" />,
       iconBgColor: 'bg-accent-100',
     },
     {
@@ -101,8 +104,8 @@ export const DashboardPage: React.FC = () => {
       value: '$89,420',
       change: '+18.7%',
       changeType: 'increase' as const,
-      icon: <TrendingUp className="w-6 h-6 text-success-600" />,
-      iconBgColor: 'bg-success-100',
+      icon: <TrendingUp className="w-5 h-5 text-secondary-600" />,
+      iconBgColor: 'bg-secondary-100',
     },
   ];
 
@@ -117,8 +120,8 @@ export const DashboardPage: React.FC = () => {
   const getActivityIcon = (type: string) => {
     switch (type) {
       case 'customer': return <UserCheck className="w-4 h-4 text-primary-500" />;
-      case 'payment': return <DollarSign className="w-4 h-4 text-success-500" />;
-      case 'invoice': return <FileText className="w-4 h-4 text-secondary-500" />;
+      case 'payment': return <DollarSign className="w-4 h-4 text-secondary-500" />;
+      case 'invoice': return <FileText className="w-4 h-4 text-primary-500" />;
       case 'employee': return <Users className="w-4 h-4 text-accent-500" />;
       default: return <Clock className="w-4 h-4 text-neutral-500" />;
     }
@@ -126,23 +129,23 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <PageContainer
-      title={`Welcome back, ${fullName || user?.firstName || 'User'}!`}
+      title={`Welcome back, ${displayName}!`}
       subtitle={`Here's what's happening at ${COMPANY_NAME} today.`}
     >
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* Stats Grid - Responsive with better breakpoints */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         {stats.map((stat, index) => (
           <StatCard key={index} {...stat} />
         ))}
       </div>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Recent Activity */}
-        <div className="lg:col-span-2">
+        <div className="xl:col-span-2">
           <Card>
-            <div className="px-6 py-4 border-b border-neutral-200">
-              <h3 className="font-semibold text-neutral-900">Recent Activity</h3>
+            <div className="px-6 py-4 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
+              <h3 className="font-semibold gradient-brand-text">Recent Activity</h3>
             </div>
             <CardBody className="p-0">
               <div className="divide-y divide-neutral-100">
@@ -151,11 +154,11 @@ export const DashboardPage: React.FC = () => {
                     key={activity.id}
                     className="flex items-center gap-4 px-6 py-4 hover:bg-neutral-50 transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center flex-shrink-0">
                       {getActivityIcon(activity.type)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-neutral-700">{activity.message}</p>
+                      <p className="text-sm text-neutral-700 truncate">{activity.message}</p>
                       <p className="text-xs text-neutral-400 mt-0.5">{activity.time}</p>
                     </div>
                   </div>
@@ -168,27 +171,34 @@ export const DashboardPage: React.FC = () => {
         {/* Quick Actions */}
         <div>
           <Card>
-            <div className="px-6 py-4 border-b border-neutral-200">
-              <h3 className="font-semibold text-neutral-900">Quick Actions</h3>
+            <div className="px-6 py-4 border-b border-neutral-200 bg-gradient-to-r from-secondary-50 to-primary-50">
+              <h3 className="font-semibold gradient-brand-text">Quick Actions</h3>
             </div>
             <CardBody>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
-                  { label: 'Add New Customer', icon: Users, color: 'primary' },
-                  { label: 'Create Invoice', icon: FileText, color: 'secondary' },
-                  { label: 'Record Payment', icon: CreditCard, color: 'accent' },
-                  { label: 'View Reports', icon: TrendingUp, color: 'success' },
+                  { label: 'Add Customer', icon: Users, gradient: 'from-primary-500 to-primary-600' },
+                  { label: 'Create Invoice', icon: FileText, gradient: 'from-secondary-500 to-secondary-600' },
+                  { label: 'Record Payment', icon: CreditCard, gradient: 'from-primary-500 to-secondary-500' },
+                  { label: 'View Reports', icon: TrendingUp, gradient: 'from-secondary-500 to-primary-500' },
                 ].map((action, index) => (
                   <button
                     key={index}
                     className={cn(
                       'w-full flex items-center gap-3 px-4 py-3 rounded-lg',
-                      'text-left transition-colors',
-                      'hover:bg-neutral-100'
+                      'text-left transition-all duration-200',
+                      'hover:bg-gradient-to-r hover:from-primary-50 hover:to-secondary-50',
+                      'border border-transparent hover:border-primary-200',
+                      'group'
                     )}
                   >
-                    <action.icon className={cn('w-5 h-5', `text-${action.color}-500`)} />
-                    <span className="text-sm font-medium text-neutral-700">{action.label}</span>
+                    <div className={cn(
+                      'w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center',
+                      action.gradient
+                    )}>
+                      <action.icon className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-700">{action.label}</span>
                   </button>
                 ))}
               </div>
