@@ -29,13 +29,13 @@ export const LoginPage: React.FC = () => {
       {/* Theme Toggle */}
       <button
         onClick={toggleTheme}
-        className="absolute top-4 right-4 z-50 p-2 rounded-lg bg-white/10 dark:bg-neutral-800 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-neutral-700 transition-colors"
+        className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-neutral-200 dark:bg-neutral-700 shadow-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors"
         title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
       >
         {resolvedTheme === 'dark' ? (
-          <Sun className="w-5 h-5 text-white" />
+          <Sun className="w-5 h-5 text-yellow-400" />
         ) : (
-          <Moon className="w-5 h-5 text-neutral-700 lg:text-white" />
+          <Moon className="w-5 h-5 text-primary-600" />
         )}
       </button>
 
