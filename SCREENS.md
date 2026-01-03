@@ -2,7 +2,9 @@
 
 > **Total Screens:** 47  
 > **Completed:** 3  
-> **Remaining:** 44
+> **Remaining:** 44  
+> **Last Updated:** January 3, 2026  
+> **Live URL:** https://superiorscents.vercel.app
 
 ---
 
