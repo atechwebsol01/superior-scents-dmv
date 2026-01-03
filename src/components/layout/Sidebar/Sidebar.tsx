@@ -84,11 +84,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500" />
           
           {!isCollapsed && (
-            <div className="flex flex-col">
-              <span className="text-lg font-bold gradient-brand-text">
-                Superior Scents
-              </span>
-              <span className="text-[10px] text-neutral-400 -mt-1">DMV, LLC</span>
+            <div className="flex items-center gap-3">
+              <img src="/favicon.svg" alt="Superior Scents" className="w-10 h-10" />
+              <div className="flex flex-col">
+                <span className="text-sm font-bold gradient-brand-text">
+                  Superior Scents
+                </span>
+                <span className="text-[10px] text-neutral-400 -mt-0.5">DMV, LLC</span>
+              </div>
             </div>
           )}
           {isCollapsed && (
