@@ -36,9 +36,7 @@ export const LoginPage: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center justify-center w-full p-12 text-white">
           {/* Logo */}
           <div className="mb-8">
-            <div className="w-24 h-24 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <span className="text-5xl font-bold">S</span>
-            </div>
+            <img src="/favicon.svg" alt="Superior Scents" className="w-24 h-24" />
           </div>
 
           {/* Company Name */}
@@ -75,9 +73,7 @@ export const LoginPage: React.FC = () => {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
-            <div className="inline-flex w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl items-center justify-center mb-4">
-              <span className="text-3xl font-bold text-white">S</span>
-            </div>
+            <img src="/favicon.svg" alt="Superior Scents" className="w-16 h-16 mx-auto mb-4" />
             <h1 className="text-2xl font-bold text-neutral-900">{COMPANY_NAME}</h1>
           </div>
 
