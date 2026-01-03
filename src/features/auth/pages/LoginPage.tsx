@@ -1,8 +1,10 @@
 import React from 'react';
 import { Navigate, useNavigate, Link } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 import { LoginForm } from '../components/LoginForm';
 import { useAuth } from '../hooks/useAuth';
 import { COMPANY_NAME } from '@/lib/constants';
+import { useThemeStore } from '@/store/themeStore';
 
 /**
  * Login Page
@@ -11,6 +13,7 @@ import { COMPANY_NAME } from '@/lib/constants';
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth();
+  const { resolvedTheme, toggleTheme } = useThemeStore();
 
   // Redirect if already authenticated
   if (isAuthenticated && !isLoading) {
@@ -22,7 +25,20 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex relative">
+      {/* Theme Toggle */}
+      <button
+        onClick={toggleTheme}
+        className="absolute top-4 right-4 z-50 p-2 rounded-lg bg-white/10 dark:bg-neutral-800 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-neutral-700 transition-colors"
+        title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {resolvedTheme === 'dark' ? (
+          <Sun className="w-5 h-5 text-white" />
+        ) : (
+          <Moon className="w-5 h-5 text-neutral-700 lg:text-white" />
+        )}
+      </button>
+
       {/* Left Panel - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary-600 via-primary-700 to-secondary-600 relative overflow-hidden">
         {/* Background Pattern */}
@@ -69,44 +85,44 @@ export const LoginPage: React.FC = () => {
       </div>
 
       {/* Right Panel - Login Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-neutral-50">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-neutral-50 dark:bg-neutral-900">
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8">
             <img src="/favicon.svg" alt="Superior Scents" className="w-16 h-16 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-neutral-900">{COMPANY_NAME}</h1>
+            <h1 className="text-2xl font-bold text-neutral-900 dark:text-white">{COMPANY_NAME}</h1>
           </div>
 
           {/* Form Card */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-neutral-900">Welcome Back</h2>
-              <p className="text-neutral-500 mt-2">Sign in to your account</p>
+              <h2 className="text-2xl font-bold text-neutral-900 dark:text-white">Welcome Back</h2>
+              <p className="text-neutral-500 dark:text-neutral-400 mt-2">Sign in to your account</p>
             </div>
 
             <LoginForm onSuccess={handleLoginSuccess} />
 
             {/* Sign Up Link */}
-            <p className="text-center text-sm text-neutral-600 mt-6">
+            <p className="text-center text-sm text-neutral-600 dark:text-neutral-400 mt-6">
               Don't have an account?{' '}
               <Link
                 to="/signup"
-                className="font-semibold text-primary-600 hover:text-primary-700"
+                className="font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400"
               >
                 Sign up
               </Link>
             </p>
 
             {/* Demo Credentials Notice */}
-            <div className="mt-4 p-4 bg-neutral-100 rounded-lg">
-              <p className="text-xs text-neutral-500 text-center">
+            <div className="mt-4 p-4 bg-neutral-100 dark:bg-neutral-700 rounded-lg">
+              <p className="text-xs text-neutral-500 dark:text-neutral-300 text-center">
                 <strong>Demo Mode:</strong> Use any email/password to login
               </p>
             </div>
           </div>
 
           {/* Footer */}
-          <p className="text-center text-sm text-neutral-500 mt-8">
+          <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-8">
             &copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
           </p>
         </div>
