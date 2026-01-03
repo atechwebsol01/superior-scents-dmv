@@ -29,29 +29,27 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         onLogout={handleLogout}
       />
 
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar
-          isOpen={sidebarOpen}
-          isCollapsed={sidebarCollapsed}
-          onClose={() => setSidebarOpen(false)}
-          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
-        />
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={sidebarOpen}
+        isCollapsed={sidebarCollapsed}
+        onClose={() => setSidebarOpen(false)}
+        onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+      />
 
-        {/* Main Content */}
-        <main
-          className={cn(
-            'flex-1 min-h-[calc(100vh-4rem)]',
-            'transition-all duration-300',
-            'pb-20 lg:pb-0', // Bottom padding for mobile nav
-            sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
-          )}
-        >
-          <div className="p-4 lg:p-6">
-            {children || <Outlet />}
-          </div>
-        </main>
-      </div>
+      {/* Main Content - margin matches sidebar width */}
+      <main
+        className={cn(
+          'min-h-[calc(100vh-4rem)]',
+          'transition-all duration-300',
+          'pb-20 lg:pb-0',
+          sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
+        )}
+      >
+        <div className="p-4 lg:p-6">
+          {children || <Outlet />}
+        </div>
+      </main>
 
       {/* Bottom Navigation (Mobile) */}
       <BottomNav />
