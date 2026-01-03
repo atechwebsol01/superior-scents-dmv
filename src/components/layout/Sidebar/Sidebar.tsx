@@ -92,8 +92,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           )}
           {isCollapsed && (
-            <div className="mx-auto w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center">
-              <span className="text-lg font-bold text-white">S</span>
+            <div className="mx-auto">
+              <img src="/favicon.svg" alt="Superior Scents" className="w-10 h-10" />
             </div>
           )}
           <button
