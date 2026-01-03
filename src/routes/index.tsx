@@ -3,7 +3,7 @@ import { MainLayout } from '@/components/layout/MainLayout';
 import { PrivateRoute } from './PrivateRoute';
 
 // Pages
-import { LoginPage } from '@/features/auth';
+import { LoginPage, SignUpPage } from '@/features/auth';
 import { DashboardPage } from '@/pages/DashboardPage';
 
 /**
@@ -15,6 +15,10 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage />,
   },
 
   // Protected Routes

@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 import type { AuthStore, LoginCredentials, User } from '../types/auth.types';
 import { STORAGE_KEYS } from '@/lib/constants';
-import api from '@/api/axios';
-import { ENDPOINTS } from '@/api/endpoints';
+// import api from '@/api/axios';
+// import { ENDPOINTS } from '@/api/endpoints';
 
 /**
  * Authentication Store
@@ -27,20 +27,36 @@ export const useAuthStore = create<AuthStore>()(
           set({ isLoading: true, error: null });
           
           try {
-            // API call to login endpoint
-            const response = await api.post(ENDPOINTS.AUTH.LOGIN, credentials);
-            const { user, token } = response.data;
+            // DEMO MODE: Mock login - replace with real API when backend is ready
+            // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            // Mock user data
+            const mockUser: User = {
+              id: '1',
+              email: credentials.email,
+              firstName: credentials.email.split('@')[0],
+              lastName: 'User',
+              role: 'admin',
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+            };
+            const mockToken = 'demo-token-' + Date.now();
 
             // Store token
-            localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+            localStorage.setItem(STORAGE_KEYS.TOKEN, mockToken);
 
             set({
-              user,
-              token,
+              user: mockUser,
+              token: mockToken,
               isAuthenticated: true,
               isLoading: false,
               error: null,
             });
+
+            // TODO: Replace with real API call when backend is ready
+            // const response = await api.post(ENDPOINTS.AUTH.LOGIN, credentials);
+            // const { user, token } = response.data;
           } catch (error: unknown) {
             const errorMessage = error instanceof Error 
               ? error.message 
@@ -86,16 +102,26 @@ export const useAuthStore = create<AuthStore>()(
           set({ isLoading: true });
 
           try {
-            // Verify token with backend
-            const response = await api.get(ENDPOINTS.AUTH.ME);
-            const user = response.data;
+            // DEMO MODE: For now, just validate token exists
+            // TODO: Replace with real API call when backend is ready
+            // const response = await api.get(ENDPOINTS.AUTH.ME);
+            // const user = response.data;
+            
+            // Simulate delay
+            await new Promise(resolve => setTimeout(resolve, 300));
 
-            set({
-              user,
-              token,
-              isAuthenticated: true,
-              isLoading: false,
-            });
+            // Get stored user from persist
+            const storedState = useAuthStore.getState();
+            if (storedState.user) {
+              set({
+                user: storedState.user,
+                token,
+                isAuthenticated: true,
+                isLoading: false,
+              });
+            } else {
+              throw new Error('No stored user');
+            }
           } catch {
             // Token invalid or expired
             localStorage.removeItem(STORAGE_KEYS.TOKEN);
