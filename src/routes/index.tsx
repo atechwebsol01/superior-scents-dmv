@@ -5,6 +5,12 @@ import { PrivateRoute } from './PrivateRoute';
 // Pages
 import { LoginPage, SignUpPage } from '@/features/auth';
 import { DashboardPage } from '@/pages/DashboardPage';
+import {
+  CustomerListPage,
+  CustomerDetailPage,
+  AddCustomerPage,
+  EditCustomerPage,
+} from '@/features/customers';
 
 /**
  * Application Routes
@@ -38,10 +44,22 @@ export const router = createBrowserRouter([
         path: 'dashboard',
         element: <DashboardPage />,
       },
-      // Customer Routes (Phase 4)
+      // Customer Routes
       {
         path: 'customers',
-        element: <div className="p-8 text-center text-neutral-500">Customers Module - Coming in Phase 4</div>,
+        element: <CustomerListPage />,
+      },
+      {
+        path: 'customers/new',
+        element: <AddCustomerPage />,
+      },
+      {
+        path: 'customers/:id',
+        element: <CustomerDetailPage />,
+      },
+      {
+        path: 'customers/:id/edit',
+        element: <EditCustomerPage />,
       },
       // Employee Routes (Phase 5)
       {
