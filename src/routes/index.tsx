@@ -11,6 +11,12 @@ import {
   AddCustomerPage,
   EditCustomerPage,
 } from '@/features/customers';
+import {
+  EmployeeListPage,
+  EmployeeDetailPage,
+  AddEmployeePage,
+  EditEmployeePage,
+} from '@/features/employees';
 
 /**
  * Application Routes
@@ -61,10 +67,22 @@ export const router = createBrowserRouter([
         path: 'customers/:id/edit',
         element: <EditCustomerPage />,
       },
-      // Employee Routes (Phase 5)
+      // Employee Routes
       {
         path: 'employees',
-        element: <div className="p-8 text-center text-neutral-500">Employees Module - Coming in Phase 5</div>,
+        element: <EmployeeListPage />,
+      },
+      {
+        path: 'employees/new',
+        element: <AddEmployeePage />,
+      },
+      {
+        path: 'employees/:id',
+        element: <EmployeeDetailPage />,
+      },
+      {
+        path: 'employees/:id/edit',
+        element: <EditEmployeePage />,
       },
       // Invoice Routes (Phase 6)
       {
