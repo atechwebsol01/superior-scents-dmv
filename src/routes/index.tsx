@@ -17,6 +17,24 @@ import {
   AddEmployeePage,
   EditEmployeePage,
 } from '@/features/employees';
+import {
+  InvoiceListPage,
+  InvoiceDetailPage,
+  CreateInvoicePage,
+  EditInvoicePage,
+} from '@/features/invoices';
+import {
+  PaymentListPage,
+  PaymentDetailPage,
+  RecordPaymentPage,
+} from '@/features/payments';
+import {
+  ReportsDashboard,
+  SalesReport,
+  GenericReport,
+} from '@/features/reports';
+import { ServicesPage } from '@/features/services';
+import { SettingsPage } from '@/features/settings';
 
 /**
  * Application Routes
@@ -84,25 +102,58 @@ export const router = createBrowserRouter([
         path: 'employees/:id/edit',
         element: <EditEmployeePage />,
       },
-      // Invoice Routes (Phase 6)
+      // Invoice Routes
       {
         path: 'invoices',
-        element: <div className="p-8 text-center text-neutral-500">Invoices Module - Coming in Phase 6</div>,
+        element: <InvoiceListPage />,
       },
-      // Payment Routes (Phase 7)
+      {
+        path: 'invoices/new',
+        element: <CreateInvoicePage />,
+      },
+      {
+        path: 'invoices/:id',
+        element: <InvoiceDetailPage />,
+      },
+      {
+        path: 'invoices/:id/edit',
+        element: <EditInvoicePage />,
+      },
+      // Payment Routes
       {
         path: 'payments',
-        element: <div className="p-8 text-center text-neutral-500">Payments Module - Coming in Phase 7</div>,
+        element: <PaymentListPage />,
       },
-      // Report Routes (Phase 8)
+      {
+        path: 'payments/new',
+        element: <RecordPaymentPage />,
+      },
+      {
+        path: 'payments/:id',
+        element: <PaymentDetailPage />,
+      },
+      // Report Routes
       {
         path: 'reports',
-        element: <div className="p-8 text-center text-neutral-500">Reports Module - Coming in Phase 8</div>,
+        element: <ReportsDashboard />,
+      },
+      {
+        path: 'reports/sales',
+        element: <SalesReport />,
+      },
+      {
+        path: 'reports/:reportId',
+        element: <GenericReport />,
+      },
+      // Services & Products
+      {
+        path: 'services',
+        element: <ServicesPage />,
       },
       // Settings
       {
         path: 'settings',
-        element: <div className="p-8 text-center text-neutral-500">Settings - Coming Soon</div>,
+        element: <SettingsPage />,
       },
     ],
   },

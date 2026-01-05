@@ -10,6 +10,7 @@ import {
   Settings,
   X,
   ChevronLeft,
+  Package,
 } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
@@ -37,6 +38,7 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
   CreditCard,
   BarChart3,
   Settings,
+  Package,
 };
 
 const defaultItems: SidebarItem[] = [
@@ -45,6 +47,7 @@ const defaultItems: SidebarItem[] = [
   { id: 'employees', label: 'Employees', path: '/employees', icon: 'UserCog' },
   { id: 'invoices', label: 'Invoices', path: '/invoices', icon: 'FileText' },
   { id: 'payments', label: 'Payments', path: '/payments', icon: 'CreditCard' },
+  { id: 'services', label: 'Services', path: '/services', icon: 'Package' },
   { id: 'reports', label: 'Reports', path: '/reports', icon: 'BarChart3' },
   { id: 'settings', label: 'Settings', path: '/settings', icon: 'Settings' },
 ];
@@ -85,9 +88,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           
           {!isCollapsed && (
             <div className="flex items-center gap-3">
-              <img src="/favicon.svg" alt="Superior Scents" className="w-10 h-10" />
+              <img src="/logo.jpg" alt="Superior Scents" className="w-10 h-10 rounded-lg object-cover" />
               <div className="flex flex-col">
-                <span className="text-sm font-bold gradient-brand-text">
+                <span className="text-sm font-bold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
                   Superior Scents
                 </span>
                 <span className="text-[10px] text-neutral-400 -mt-0.5">DMV, LLC</span>
@@ -96,7 +99,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
           {isCollapsed && (
             <div className="mx-auto">
-              <img src="/favicon.svg" alt="Superior Scents" className="w-10 h-10" />
+              <img src="/logo.jpg" alt="Superior Scents" className="w-10 h-10 rounded-lg object-cover" />
             </div>
           )}
           <button

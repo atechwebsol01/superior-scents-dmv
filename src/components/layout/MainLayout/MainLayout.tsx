@@ -4,6 +4,7 @@ import { cn } from '@/lib/cn';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { BottomNav } from '@/components/layout/BottomNav';
+import { Footer } from '@/components/layout/Footer';
 import { useAuth } from '@/features/auth';
 
 export interface MainLayoutProps {
@@ -20,7 +21,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col">
       {/* Header */}
       <Header
         userName={fullName || user?.firstName || 'User'}
@@ -40,15 +41,18 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       {/* Main Content - margin matches sidebar width */}
       <main
         className={cn(
-          'min-h-[calc(100vh-4rem)]',
+          'flex-1',
           'transition-all duration-300',
           'pb-20 lg:pb-0',
           sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
         )}
       >
-        <div className="p-4 lg:p-6">
+        <div className="p-4 lg:p-6 min-h-[calc(100vh-4rem-200px)]">
           {children || <Outlet />}
         </div>
+        
+        {/* Footer (Desktop only) */}
+        <Footer />
       </main>
 
       {/* Bottom Navigation (Mobile) */}

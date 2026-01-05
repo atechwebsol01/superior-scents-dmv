@@ -21,6 +21,8 @@ export { Card, CardHeader, CardBody, CardFooter, type CardProps } from './common
 export { EmptyState, type EmptyStateProps } from './common/EmptyState';
 export { Dropdown, type DropdownProps, type DropdownItem } from './common/Dropdown';
 export { Tooltip, type TooltipProps } from './common/Tooltip';
+export { ConfirmModal, type ConfirmModalProps, useConfirm, ConfirmProvider } from './common/ConfirmModal';
+export { ErrorBoundary } from './common/ErrorBoundary';
 
 // Layout Components
 export { Header, type HeaderProps } from './layout/Header';
