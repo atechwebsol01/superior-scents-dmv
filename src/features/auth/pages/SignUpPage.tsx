@@ -23,35 +23,37 @@ export const SignUpPage: React.FC = () => {
     navigate('/login', { replace: true });
   };
 
+  const isDark = resolvedTheme === 'dark';
+
   const benefits = [
-    { text: 'Streamline Your Operations', icon: Zap, color: 'text-yellow-400' },
-    { text: 'Track Everything in One Place', icon: BarChart3, color: 'text-blue-400' },
-    { text: 'Manage Your Team Efficiently', icon: Users, color: 'text-green-400' },
-    { text: 'Secure & Reliable Platform', icon: Shield, color: 'text-purple-400' },
+    { text: 'Streamline Your Operations', icon: Zap, color: 'text-yellow-300' },
+    { text: 'Track Everything in One Place', icon: BarChart3, color: 'text-blue-300' },
+    { text: 'Manage Your Team Efficiently', icon: Users, color: 'text-green-300' },
+    { text: 'Secure & Reliable Platform', icon: Shield, color: 'text-purple-300' },
   ];
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden">
+    <div className="min-h-screen flex relative overflow-hidden bg-white dark:bg-neutral-950">
       {/* Theme Toggle */}
       <button
         onClick={toggleTheme}
-        className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300"
-        title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        className="absolute top-4 right-4 z-50 p-2.5 rounded-full bg-neutral-200 dark:bg-neutral-700 shadow-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-all duration-300"
+        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       >
-        {resolvedTheme === 'dark' ? (
+        {isDark ? (
           <Sun className="w-5 h-5 text-yellow-400" />
         ) : (
-          <Moon className="w-5 h-5 text-white" />
+          <Moon className="w-5 h-5 text-neutral-600" />
         )}
       </button>
 
       {/* Left Panel - Branding (Desktop) */}
-      <div className="hidden lg:flex lg:w-1/2 bg-black relative overflow-hidden">
-        {/* Animated gradient background - reversed colors for signup */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-secondary-600 via-secondary-700 to-primary-600 dark:from-neutral-900 dark:via-neutral-950 dark:to-neutral-900 relative overflow-hidden">
+        {/* Animated gradient background */}
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-500 rounded-full filter blur-[100px] animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-500 rounded-full filter blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-secondary-400 rounded-full filter blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary-400 dark:bg-secondary-500 rounded-full filter blur-[100px] animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-400 dark:bg-primary-500 rounded-full filter blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/3 left-1/3 w-64 h-64 bg-secondary-300 dark:bg-secondary-400 rounded-full filter blur-[80px] animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
         {/* Sparkle effects */}
@@ -59,7 +61,7 @@ export const SignUpPage: React.FC = () => {
           {[...Array(15)].map((_, i) => (
             <Sparkles
               key={i}
-              className="absolute text-white/20 animate-pulse"
+              className="absolute text-white/30 animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -75,7 +77,7 @@ export const SignUpPage: React.FC = () => {
         <div className="relative z-10 flex flex-col items-center justify-center w-full p-12 text-white">
           {/* Logo with glow effect */}
           <div className="relative mb-8 group">
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary-400 to-primary-400 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
             <img 
               src="/logo.jpg" 
               alt="Superior Scents" 
@@ -83,33 +85,33 @@ export const SignUpPage: React.FC = () => {
             />
           </div>
 
-          {/* Company Name with gradient */}
-          <h1 className="text-4xl font-bold text-center mb-2 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+          {/* Company Name */}
+          <h1 className="text-4xl font-bold text-center mb-2 text-white">
             Superior Scents
           </h1>
-          <p className="text-lg text-gray-400 mb-2">DMV, LLC</p>
-          <p className="text-sm text-gray-500 text-center max-w-sm mb-8">
+          <p className="text-lg text-white/70 mb-2">DMV, LLC</p>
+          <p className="text-sm text-white/50 text-center max-w-sm mb-8">
             Join Our Business Management Platform
           </p>
 
           {/* Elegant divider */}
-          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-gray-500 to-transparent mb-8" />
+          <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent mb-8" />
 
           {/* Benefits with icons */}
           <div className="space-y-4 w-full max-w-xs">
             {benefits.map((benefit, index) => (
               <div 
                 key={index} 
-                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 hover:translate-x-1"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300 hover:translate-x-1"
               >
                 <benefit.icon className={`w-5 h-5 ${benefit.color}`} />
-                <span className="text-gray-300 text-sm">{benefit.text}</span>
+                <span className="text-white/90 text-sm">{benefit.text}</span>
               </div>
             ))}
           </div>
 
           {/* Bottom tagline */}
-          <p className="absolute bottom-8 text-xs text-gray-600 tracking-widest uppercase">
+          <p className="absolute bottom-8 text-xs text-white/40 tracking-widest uppercase">
             Start Your Journey Today
           </p>
         </div>
@@ -146,7 +148,7 @@ export const SignUpPage: React.FC = () => {
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="font-semibold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent hover:from-primary-500 hover:to-secondary-500"
+                className="font-semibold text-primary-600 hover:text-primary-500 dark:text-primary-400"
               >
                 Sign in
               </Link>
