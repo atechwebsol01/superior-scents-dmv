@@ -3,6 +3,8 @@ export { CustomerListPage } from './pages/CustomerListPage';
 export { CustomerDetailPage } from './pages/CustomerDetailPage';
 export { AddCustomerPage } from './pages/AddCustomerPage';
 export { EditCustomerPage } from './pages/EditCustomerPage';
+export { CustomerImportPage } from './pages/CustomerImportPage';
+export { CustomerExportPage } from './pages/CustomerExportPage';
 export { CustomerForm } from './components/CustomerForm';
 export { ServicePeriodTable } from './components/ServicePeriodTable';
 export { ServicePeriodForm } from './components/ServicePeriodForm';

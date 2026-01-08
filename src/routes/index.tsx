@@ -10,31 +10,39 @@ import {
   CustomerDetailPage,
   AddCustomerPage,
   EditCustomerPage,
+  CustomerImportPage,
+  CustomerExportPage,
 } from '@/features/customers';
 import {
   EmployeeListPage,
   EmployeeDetailPage,
   AddEmployeePage,
   EditEmployeePage,
+  EmployeeSchedulePage,
 } from '@/features/employees';
 import {
   InvoiceListPage,
   InvoiceDetailPage,
   CreateInvoicePage,
   EditInvoicePage,
+  QuickInvoicePage,
 } from '@/features/invoices';
 import {
   PaymentListPage,
   PaymentDetailPage,
   RecordPaymentPage,
+  PaymentHistoryPage,
 } from '@/features/payments';
 import {
   ReportsDashboard,
   SalesReport,
   GenericReport,
+  CommissionReport,
+  CustomReportBuilder,
 } from '@/features/reports';
-import { ServicesPage } from '@/features/services';
+import { ServicesPage, ServiceSchedulingPage, ProductInventoryPage } from '@/features/services';
 import { SettingsPage } from '@/features/settings';
+import { NotificationsPage } from '@/features/notifications';
 
 /**
  * Application Routes
@@ -78,6 +86,14 @@ export const router = createBrowserRouter([
         element: <AddCustomerPage />,
       },
       {
+        path: 'customers/import',
+        element: <CustomerImportPage />,
+      },
+      {
+        path: 'customers/export',
+        element: <CustomerExportPage />,
+      },
+      {
         path: 'customers/:id',
         element: <CustomerDetailPage />,
       },
@@ -93,6 +109,10 @@ export const router = createBrowserRouter([
       {
         path: 'employees/new',
         element: <AddEmployeePage />,
+      },
+      {
+        path: 'employees/schedule',
+        element: <EmployeeSchedulePage />,
       },
       {
         path: 'employees/:id',
@@ -112,6 +132,10 @@ export const router = createBrowserRouter([
         element: <CreateInvoicePage />,
       },
       {
+        path: 'invoices/quick',
+        element: <QuickInvoicePage />,
+      },
+      {
         path: 'invoices/:id',
         element: <InvoiceDetailPage />,
       },
@@ -129,6 +153,10 @@ export const router = createBrowserRouter([
         element: <RecordPaymentPage />,
       },
       {
+        path: 'payments/history',
+        element: <PaymentHistoryPage />,
+      },
+      {
         path: 'payments/:id',
         element: <PaymentDetailPage />,
       },
@@ -142,6 +170,14 @@ export const router = createBrowserRouter([
         element: <SalesReport />,
       },
       {
+        path: 'reports/commission',
+        element: <CommissionReport />,
+      },
+      {
+        path: 'reports/builder',
+        element: <CustomReportBuilder />,
+      },
+      {
         path: 'reports/:reportId',
         element: <GenericReport />,
       },
@@ -149,6 +185,19 @@ export const router = createBrowserRouter([
       {
         path: 'services',
         element: <ServicesPage />,
+      },
+      {
+        path: 'services/scheduling',
+        element: <ServiceSchedulingPage />,
+      },
+      {
+        path: 'services/inventory',
+        element: <ProductInventoryPage />,
+      },
+      // Notifications
+      {
+        path: 'notifications',
+        element: <NotificationsPage />,
       },
       // Settings
       {
